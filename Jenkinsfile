@@ -16,8 +16,14 @@ pipeline {
     stage('E2E Tests') {
       steps {
         warnError(message: 'Error running appium') {
-          sh '''cd appium
+          nodejs('nodejs') {
+            dir(path: 'appium') {
+              sh '''npm install
 npm test'''
+            }
+
+          }
+
         }
 
       }
