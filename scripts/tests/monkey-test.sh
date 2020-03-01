@@ -1,0 +1,1 @@
+adb shell monkey -p org.wikipedia.dev -v 10000
