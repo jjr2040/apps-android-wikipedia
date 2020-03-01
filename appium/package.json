@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "test": "jest || exit 0"
+  },
+  "dependencies": {
+    "jest": "^25.1.0",
+    "webdriverio": "^5.18.7"
+  }
+}
