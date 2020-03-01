@@ -3,8 +3,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        withGradle() {
-          sh './gradlew assembleDev'
+        catchError() {
+          withGradle() {
+            sh './gradlew assembleDev'
+          }
+
         }
 
       }
