@@ -13,8 +13,15 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    ANDROID_SDK_ROOT = '$HOME/Library/Android/sdk'
+    stage('E2E Tests') {
+      steps {
+        warnError(message: 'Error running appium') {
+          sh '''cd appium
+npm test'''
+        }
+
+      }
+    }
+
   }
 }
