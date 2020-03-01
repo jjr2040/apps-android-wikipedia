@@ -46,7 +46,7 @@ describe('android', () => {
 
     const isDisplayed = await button.isDisplayed();
     
-    expect(isDisplayed).toBe(false);
+    expect(isDisplayed).toBe(true);
   });
 
   // test('Can search a term', async () => {
