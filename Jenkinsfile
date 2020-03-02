@@ -40,7 +40,7 @@ pipeline {
         stage('Random Testing') {
           steps {
             warnError(message: 'Monkeys broke something') {
-              sh './scripts/tests/monkey-test.sh'
+              sh 'bash ./scripts/tests/monkey-test.sh'
             }
 
           }
