@@ -31,7 +31,6 @@ pipeline {
         warnError(message: 'Error running appium') {
           nodejs('nodejs') {
             dir(path: 'appium') {
-              sh 'appium'
               sh 'npm test'
             }
 
