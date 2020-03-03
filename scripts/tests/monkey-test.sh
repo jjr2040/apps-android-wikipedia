@@ -1,1 +1,1 @@
-$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -v 10000
+$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -v $1
