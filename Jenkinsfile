@@ -27,7 +27,7 @@ pipeline {
 
     stage('E2E Tests') {
       when {
-        expression { params.ENABLE_E2E == 'TRUE' }
+        expression { params.ENABLE_E2E }
       }
       steps {
         warnError(message: 'Error running appium') {
@@ -46,7 +46,7 @@ pipeline {
 
     stage('Random Testing') {
       when {
-        expression { params.ENABLE_RANDOM_TESTING == 'TRUE' }
+        expression { params.ENABLE_RANDOM_TESTING }
       }
       steps {
         warnError(message: 'Monkeys broke something') {
