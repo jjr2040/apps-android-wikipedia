@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters {
+    string(name: 'NUM_RANDOM_EVENTS', defaultValue: '1000', description: 'Number of events for Random testing')
+  }
   stages {
     stage('Build') {
       steps {
@@ -40,7 +43,7 @@ pipeline {
         stage('Random Testing') {
           steps {
             warnError(message: 'Monkeys broke something') {
-              sh 'bash ./scripts/tests/monkey-test.sh'
+              sh "bash ./scripts/tests/monkey-test.sh ${params.NUM_RANDOM_EVENTS}"
             }
 
           }
