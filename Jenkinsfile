@@ -42,7 +42,7 @@ pipeline {
       post {
         always {
           dir('appium') {
-            archiveArtifacts artifacts: 'snapshots/**/*.png', fingerprint: true
+            archiveArtifacts artifacts: 'snapshots/__diff_snapshots__/**/*.png', fingerprint: true
             // junit 'cypress/results/**/*.xml'
           }
         }
