@@ -39,6 +39,14 @@ pipeline {
         }
 
       }
+      post {
+        always {
+          dir('appium') {
+            archiveArtifacts artifacts: 'snapshots/**/*.png', fingerprint: true
+            // junit 'cypress/results/**/*.xml'
+          }
+        }
+      }
     }
 
     stage('Random Testing') {

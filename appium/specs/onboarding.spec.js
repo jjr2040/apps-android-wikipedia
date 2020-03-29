@@ -1,6 +1,8 @@
 const caps = require('../helpers/caps');
 const webdriverio = require('webdriverio');
+const fs = require('mz/fs');
 const selectorById = require('../helpers/utils').selectorById;
+const compareAndSaveScreenshot = require('../helpers/utils').compareAndSaveScreenshot;
 
 jest.setTimeout(30000);
 
@@ -24,8 +26,9 @@ describe('android', () => {
 
     const button = await client.$(selector);
 
-
     const isDisplayed = await button.isDisplayed();
+
+    await compareAndSaveScreenshot(client, 'onboarding-skip-button.png');
     
     expect(isDisplayed).toBe(true);
   });
@@ -42,6 +45,8 @@ describe('android', () => {
 
     const primaryText = await client.$(selectorById(currentPackage, 'view_onboarding_page_primary_text'));
     const text = await primaryText.getText()
+
+    await compareAndSaveScreenshot(client, 'onboarding-scroll.png');
 
     expect(text).toBe('New ways to explore');
   });
