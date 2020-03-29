@@ -38,6 +38,8 @@ exports.buildId = buildId;
 
 exports.compareAndSaveScreenshot = async (client, imageName) => {
 
+  const updateSnapshots = process.env.UPDATE_SNAPSHOTS == 'true';
+  
   const outputScreenshotsDir = './snapshots/';
   const outputScreenshotsPath = outputScreenshotsDir + imageName;
   const diffSnapshotsDir = './snapshots/__diff_snapshots__/';
@@ -46,7 +48,7 @@ exports.compareAndSaveScreenshot = async (client, imageName) => {
     await fs.mkdir(outputScreenshotsDir, { recursive: true });
   }
 
-  if (fs.existsSync(outputScreenshotsPath)) {
+  if (fs.existsSync(outputScreenshotsPath) && !updateSnapshots) {
 
     if (!fs.existsSync(diffSnapshotsDir)) {
       await fs.mkdir(diffSnapshotsDir, { recursive: true });

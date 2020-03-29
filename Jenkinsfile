@@ -31,7 +31,7 @@ pipeline {
         warnError(message: 'Error running appium') {
           nodejs('nodejs') {
             dir(path: 'appium') {
-              sh 'npm test'
+              sh "UPDATE_SNAPSHOTS=${params.UPDATE_SNAPSHOTS} npm test"
             }
 
           }
@@ -69,5 +69,6 @@ pipeline {
     string(name: 'NUM_RANDOM_EVENTS', defaultValue: '1000', description: 'Number of events for Random testing')
     booleanParam(name: 'ENABLE_E2E', defaultValue: true, description: 'Enable E2E testing')
     booleanParam(name: 'ENABLE_RANDOM_TESTING', defaultValue: true, description: 'Enable random testing testing')
+    booleanParam(name: 'UPDATE_SNAPSHOTS', defaultValue: false, description: 'Should updated VRT snapshots')
   }
 }
