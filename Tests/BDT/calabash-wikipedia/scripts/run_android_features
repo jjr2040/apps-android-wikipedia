@@ -20,13 +20,13 @@ done
 # clear old files
 rm -rf screenshot*
 rm -rf test_servers
-rm ../../../app/build/outputs/apk/development/debug/WikipediaAndroid.apk
+rm ../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk
 
 # change apk name
-mv ../../../app/build/outputs/apk/development/debug/*.apk ../../../app/build/outputs/apk/development/debug/WikipediaAndroid.apk
+mv ../../../app/build/outputs/apk/dev/debug/*.apk ../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk
 
 # resign apk
-bundle exec calabash-android resign "../../../app/build/outputs/apk/development/debug/WikipediaAndroid.apk"
-bundle exec calabash-android build "../../../app/build/outputs/apk/development/debug/WikipediaAndroid.apk"
+bundle exec calabash-android resign "../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk"
+bundle exec calabash-android build "../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk"
 # run tests
-bundle exec calabash-android run "../../../app/build/outputs/apk/development/debug/WikipediaAndroid.apk" $PARAMS
+bundle exec calabash-android run "../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk" $PARAMS
