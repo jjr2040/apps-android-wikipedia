@@ -20,10 +20,6 @@ done
 # clear old files
 rm -rf screenshot*
 rm -rf test_servers
-#rm ../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk
-
-# change apk name
-#mv ../../../app/build/outputs/apk/dev/debug/*.apk ../../../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk
 
 # resign apk
 echo "resigning..."

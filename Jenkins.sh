@@ -1,5 +1,5 @@
 APK_PATH="./app/build/outputs/apk/dev/debug"
-MONKEY_RESULTS="tests/Monkey/monkey_results.txt"
+MONKEY_RESULTS="./tests/Monkey/monkey_results.txt"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
 RANDOM=$3
