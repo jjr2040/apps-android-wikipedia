@@ -25,6 +25,7 @@ if [ ! ${RANDOM} = "false" ] ; then
 	rm ${MONKEY_RESULTS}
 	touch ${MONKEY_RESULTS}
 	$ANDROID_HOME/platform-tools/adb install -r ${APK_PATH}/WikipediaAndroid.apk
+    $ANDROID_HOME/platform-tools/adb shell pm list packages
     $ANDROID_HOME/platform-tools/adb shell am start -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n "org.wikipedia.dev/org.wikipedia.main.MainActivity"
 	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${RANDOM_SEED} -v ${RANDOM_EVENTS} >> ${MONKEY_RESULTS}
 	echo "------- END MONKEY"
