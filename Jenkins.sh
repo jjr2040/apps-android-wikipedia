@@ -25,7 +25,8 @@ fi
 
 if [ ! ${VRT} = "false" ] ; then
 	echo "------- START VRT"
-	./appium/yarn run vrt:run
+	cd appium && yarn run vrt:run
+	cd ..
 	echo "------- END VRT"
 fi
 
