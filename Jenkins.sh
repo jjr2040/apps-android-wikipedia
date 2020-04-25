@@ -6,6 +6,8 @@ VRT=$3
 RANDOM=$4
 RANDOM_EVENTS=$5
 RANDOM_SEED=$6
+MUTATION=$7
+MUTANTS_NUMBER=$8
 
 
 mv -f ${APK_PATH}/*.apk ${APK_PATH}/WikipediaAndroid.apk
@@ -35,4 +37,16 @@ if [ ! ${RANDOM} = "false" ] ; then
     $ANDROID_HOME/platform-tools/adb shell am start -n "org.wikipedia.dev/org.wikipedia.main.MainActivity"
 	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${RANDOM_SEED} -v ${RANDOM_EVENTS} >> ${MONKEY_RESULTS}
 	echo "------- END MONKEY"
+fi
+
+if [ ! ${MUTATION} = "false" ] ; then
+	echo "------- START MUTATION (MUTAPK)"
+	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
+	cd MutAPK
+	export MAVEN_HOME=/Users/dayanaromero/.jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven
+	export PATH=$PATH:$MAVEN_HOME/bin
+	mvn clean
+	mvn package
+	java -jar target/MutAPK-0.0.1.jar ${APK_PATH}/WikipediaAndroid.apk org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
+	echo "------- END MUTATION MUTAPK"
 fi
