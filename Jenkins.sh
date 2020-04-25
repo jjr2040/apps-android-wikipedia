@@ -29,3 +29,13 @@ if [ ! ${RANDOM} = "false" ] ; then
 	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${RANDOM_SEED} -v ${RANDOM_EVENTS} >> ${MONKEY_RESULTS}
 	echo "------- END MONKEY"
 fi
+
+if [ ! ${MUTATION} = "false" ] ; then
+	echo "------- START MUTATION (MUTAPK)"
+	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
+	cd MutAPK
+	mvn clean
+	mvn package
+	java -jar target/MutAPK-0.0.1.jar ${APK_PATH}/WikipediaAndroid.apk org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
+	echo "------- END MUTATION MUTAPK"
+fi
