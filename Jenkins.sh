@@ -2,9 +2,10 @@ APK_PATH="./app/build/outputs/apk/dev/debug"
 MONKEY_RESULTS="./tests/Monkey/monkey_results.txt"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
-RANDOM=$3
-RANDOM_EVENTS=$4
-RANDOM_SEED=$5
+VRT=$3
+RANDOM=$4
+RANDOM_EVENTS=$5
+RANDOM_SEED=$6
 
 
 mv -f ${APK_PATH}/*.apk ${APK_PATH}/WikipediaAndroid.apk
@@ -18,6 +19,12 @@ if [ ! ${E2E_BDT} = "false" ] ; then
 	cd scripts && ./run_android_features -r -d ${ANDROID_AVD_DEVICE}
 	cd ../../../..
 	echo "------- END BDT (CALABASH/CUCUMBER)"
+fi
+
+if [ ! ${VRT} = "false" ] ; then
+	echo "------- START VRT"
+	./appium/yarn run vrt:run
+	echo "------- END VRT"
 fi
 
 if [ ! ${RANDOM} = "false" ] ; then
