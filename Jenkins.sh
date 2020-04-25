@@ -5,6 +5,8 @@ E2E_BDT=$2
 RANDOM=$3
 RANDOM_EVENTS=$4
 RANDOM_SEED=$5
+MUTATION=$6
+MUTANTS_NUMBER=$7
 
 
 mv -f ${APK_PATH}/*.apk ${APK_PATH}/WikipediaAndroid.apk
@@ -34,6 +36,8 @@ if [ ! ${MUTATION} = "false" ] ; then
 	echo "------- START MUTATION (MUTAPK)"
 	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
 	cd MutAPK
+	export MAVEN_HOME=/Users/dayanaromero/.jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven
+	export PATH=$PATH:$MAVEN_HOME/bin
 	mvn clean
 	mvn package
 	java -jar target/MutAPK-0.0.1.jar ${APK_PATH}/WikipediaAndroid.apk org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
