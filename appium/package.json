@@ -3,7 +3,7 @@
     "dev": "appium",
     "test": "jest || exit 0",
     "vrt:install": "npm install",
-    "vrt:run": "npm run vrt:install && start-server-and-test dev http-get://localhost:4723 test"
+    "vrt:run": "npm run vrt:install && start-server-and-test dev http-get://localhost:4723/wd/hub/status test"
   },
   "dependencies": {
     "appium": "*",
