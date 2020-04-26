@@ -8,6 +8,7 @@ RANDOM_EVENTS=$5
 RANDOM_SEED=$6
 MUTATION=$7
 MUTANTS_NUMBER=$8
+OPERATORS=$9
 
 
 mv -f ${APK_PATH}/*.apk ${APK_PATH}/WikipediaAndroid.apk
@@ -45,6 +46,7 @@ if [ ! ${MUTATION} = "false" ] ; then
 	echo "------- START MUTATION (MUTAPK)"
 	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
 	cd MutAPK
+	echo ${OPERATORS} > operators.properties
 	mkdir mutants
 	mvn clean
 	mvn package
