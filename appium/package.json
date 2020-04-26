@@ -3,10 +3,12 @@
     "dev": "appium",
     "test": "jest || exit 0",
     "vrt:install": "npm install",
-    "vrt:run": "npm run vrt:install && start-server-and-test dev http-get://localhost:4723/wd/hub/status test"
+    "vrt:run": "npm run vrt:install && start-server-and-test dev http-get://localhost:4723/wd/hub/status test",
+    "vrt:doctor": "npm run vrt:install && appium-doctor --android"
   },
   "dependencies": {
     "appium": "*",
+    "appium-doctor": "*",
     "start-server-and-test": "*",
     "jest": "^25.1.0",
     "webdriverio": "^5.18.7",
