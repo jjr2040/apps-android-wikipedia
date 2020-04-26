@@ -67,7 +67,7 @@ if [ ! ${MUTATION} = "false" ] ; then
 	echo "------- START MUTATION (MUTAPK)"
 	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
 	cd MutAPK
-	echo ${OPERATORS} > operators.properties
+	echo -e ${OPERATORS} > operators.properties
 	mkdir mutants
 	mvn clean
 	mvn package
