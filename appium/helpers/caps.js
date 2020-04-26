@@ -11,7 +11,7 @@ const opts = {
     appActivity: "org.wikipedia.main.MainActivity",
     appWaitActivity: "org.wikipedia.*",
     automationName: "UiAutomator2",
-    avd: `${process.env.ANDROID_AVD_DEVICE}`,
+    avd: `${process.env.ANDROID_AVD_NAME}`,
     adbPort: `${process.env.ANDROID_ADB_SERVER_PORT}`
   }
 };
