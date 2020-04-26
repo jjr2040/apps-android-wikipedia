@@ -7,9 +7,9 @@ ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
 VRT=$3
 VRT_TRESHOLD=$4
-RANDOM=$5
-RANDOM_EVENTS=$6
-RANDOM_SEED=$7
+MONKEY=$5
+MONKEY_EVENTS=$6
+MONKEY_SEED=$7
 MUTATION=$8
 MUTANTS_NUMBER=$9
 OPERATORS=${10}
@@ -19,9 +19,9 @@ echo "Android device: ${ANDROID_AVD_DEVICE}"
 echo "E2E enabled: ${E2E_BDT}"
 echo "VRT enabled: ${VRT}"
 echo "VRT treshold: ${VRT_TRESHOLD}"
-echo "Random enabled: ${RANDOM}"
-echo "Random events: ${RANDOM_EVENTS}"
-echo "Random seed: ${RANDOM_SEED}"
+echo "Monkey enabled: ${MONKEY}"
+echo "Monkey events: ${MONKEY_EVENTS}"
+echo "Monkey seed: ${MONKEY_SEED}"
 echo "Mutation enabled: ${MUTATION}"
 echo "Number of mutants: ${MUTANTS_NUMBER}"
 echo "Mutation operators: ${OPERATORS}"
@@ -47,13 +47,13 @@ if [ ! ${VRT} = "false" ] ; then
 	echo "------- END VRT"
 fi
 
-if [ ! ${RANDOM} = "false" ] ; then
+if [ ! ${MONKEY} = "false" ] ; then
 	echo "------- START MONKEY"
 	rm ${MONKEY_RESULTS}
 	touch ${MONKEY_RESULTS}
 	$ANDROID_HOME/platform-tools/adb install -r -g ${ANDROID_APK}
     $ANDROID_HOME/platform-tools/adb shell am start -n "org.wikipedia.dev/org.wikipedia.main.MainActivity"
-	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${RANDOM_SEED} -v ${RANDOM_EVENTS} >> ${MONKEY_RESULTS}
+	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${MONKEY_SEED} -v ${MONKEY_EVENTS} >> ${MONKEY_RESULTS}
 	echo "------- END MONKEY"
 fi
 
