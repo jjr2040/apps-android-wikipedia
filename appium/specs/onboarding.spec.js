@@ -12,6 +12,7 @@ describe('android', () => {
   let currentPackage;
 
   beforeAll(async () => {
+    caps["adbPort"] = `${process.env.ANDROID_AVD_ADB_PORT}`
     caps["avd"] = `${process.env.ANDROID_AVD_DEVICE}`
     caps["app"] = "../app/build/outputs/apk/dev/debug/WikipediaAndroid.apk";
     client = await webdriverio.remote(caps);
