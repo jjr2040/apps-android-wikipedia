@@ -1,6 +1,7 @@
-APK_PATH="./app/build/outputs/apk/dev/debug"
+CWD=${PWD}
+APK_PATH="app/build/outputs/apk/dev/debug"
 APK_NAME="WikipediaAndroid.apk"
-ANDROID_APK=${APK_PATH}/${APK_NAME}
+export ANDROID_APK=${CWD}/${APK_PATH}/${APK_NAME}
 MONKEY_RESULTS="./tests/Monkey/monkey_results.txt"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
