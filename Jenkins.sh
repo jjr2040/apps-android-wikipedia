@@ -45,8 +45,7 @@ if [ ! ${MUTATION} = "false" ] ; then
 	echo "------- START MUTATION (MUTAPK)"
 	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
 	cd MutAPK
-	export MAVEN_HOME=/Users/dayanaromero/.jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven
-	export PATH=$PATH:$MAVEN_HOME/bin
+	mkdir mutants
 	mvn clean
 	mvn package
 	java -jar target/MutAPK-0.0.1.jar ${APK_PATH}/WikipediaAndroid.apk org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
