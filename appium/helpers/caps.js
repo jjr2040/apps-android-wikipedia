@@ -11,7 +11,7 @@ const opts = {
     appActivity: "org.wikipedia.main.MainActivity",
     appWaitActivity: "org.wikipedia.*",
     automationName: "UiAutomator2",
-     avd: 'Nexus_5_API_26'
+    // avd: 'Nexus_5_API_26'
     // automationName: "Espresso"
   }
 };
