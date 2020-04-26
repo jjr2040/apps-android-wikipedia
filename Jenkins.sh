@@ -33,6 +33,7 @@ echo "--------------"
 
 mv -f ${APK_PATH}/*.apk ${ANDROID_APK}
 rm ${MONKEY_PATH}/*
+touch ${MONKEY_RESULTS}
 rm ${VRT_DIFF_PATH}/*
 rm ${CUCUMBER_PATH}/*
 
@@ -56,7 +57,6 @@ fi
 
 if [ ! ${MONKEY} = "false" ] ; then
 	echo "------- START MONKEY"
-	touch ${MONKEY_RESULTS}
 	$ANDROID_HOME/platform-tools/adb install -r -g ${ANDROID_APK}
     $ANDROID_HOME/platform-tools/adb shell am start -n "org.wikipedia.dev/org.wikipedia.main.MainActivity"
 	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${MONKEY_SEED} -v ${MONKEY_EVENTS} >> ${MONKEY_RESULTS}
