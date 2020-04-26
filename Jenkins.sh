@@ -6,13 +6,26 @@ MONKEY_RESULTS="./tests/Monkey/monkey_results.txt"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
 VRT=$3
-RANDOM=$4
-RANDOM_EVENTS=$5
-RANDOM_SEED=$6
-MUTATION=$7
-MUTANTS_NUMBER=$8
-OPERATORS=$9
+VRT_TRESHOLD=$4
+RANDOM=$5
+RANDOM_EVENTS=$6
+RANDOM_SEED=$7
+MUTATION=$8
+MUTANTS_NUMBER=$9
+OPERATORS=${10}
 
+echo "--------------"
+echo "Android device: ${ANDROID_AVD_DEVICE}"
+echo "E2E enabled: ${E2E_BDT}"
+echo "VRT enabled: ${VRT}"
+echo "VRT treshold: ${VRT_TRESHOLD}"
+echo "Random enabled: ${RANDOM}"
+echo "Random events: ${RANDOM_EVENTS}"
+echo "Random seed: ${RANDOM_SEED}"
+echo "Mutation enabled: ${MUTATION}"
+echo "Number of mutants: ${MUTANTS_NUMBER}"
+echo "Mutation operators: ${OPERATORS}"
+echo "--------------"
 
 mv -f ${APK_PATH}/*.apk ${ANDROID_APK}
 
