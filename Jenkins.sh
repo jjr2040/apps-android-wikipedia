@@ -25,6 +25,7 @@ fi
 
 if [ ! ${VRT} = "false" ] ; then
 	echo "------- START VRT"
+	$ANDROID_HOME/platform-tools/adb devices
 	cd appium && npm run vrt:run
 	cd ..
 	echo "------- END VRT"
