@@ -11,8 +11,8 @@ const opts = {
     appActivity: "org.wikipedia.main.MainActivity",
     appWaitActivity: "org.wikipedia.*",
     automationName: "UiAutomator2",
-    // avd: 'Nexus_5_API_26'
-    // automationName: "Espresso"
+    avd: `${process.env.ANDROID_AVD_DEVICE}`,
+    adbPort: `${process.env.ANDROID_AVD_ADB_PORT}`
   }
 };
 
