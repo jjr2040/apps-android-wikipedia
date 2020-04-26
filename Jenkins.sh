@@ -26,7 +26,7 @@ fi
 
 if [ ! ${VRT} = "false" ] ; then
 	echo "------- START VRT"
-	cd appium && npm run vrt:doctor
+	cd appium && npm run vrt:run
 	cd ..
 	echo "------- END VRT"
 fi
