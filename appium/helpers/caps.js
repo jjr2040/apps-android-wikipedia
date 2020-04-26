@@ -5,13 +5,13 @@ const opts = {
     platformName: "Android",
     platformVersion: "8",
     deviceName: "Android Emulator",
-    // app: "../app/build/outputs/apk/dev/debug/app-dev-debug.apk",
+    app: `${process.env.ANDROID_APK}`,
     // appPackage: "io.appium.android.apis",
     appPackage: 'org.wikipedia.dev',
     appActivity: "org.wikipedia.main.MainActivity",
     appWaitActivity: "org.wikipedia.*",
     automationName: "UiAutomator2",
-    avd: `${process.env.ANDROID_AVD_DEVICE}`,
+    avd: `${process.env.ANDROID_AVD_NAME}`,
     adbPort: `${process.env.ANDROID_ADB_SERVER_PORT}`
   }
 };

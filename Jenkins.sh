@@ -1,4 +1,6 @@
 APK_PATH="./app/build/outputs/apk/dev/debug"
+APK_NAME="WikipediaAndroid.apk"
+ANDROID_APK=${APK_PATH}/${APK_NAME}
 MONKEY_RESULTS="./tests/Monkey/monkey_results.txt"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
@@ -11,7 +13,7 @@ MUTANTS_NUMBER=$8
 OPERATORS=$9
 
 
-mv -f ${APK_PATH}/*.apk ${APK_PATH}/WikipediaAndroid.apk
+mv -f ${APK_PATH}/*.apk ${ANDROID_APK}
 
 if [ ! ${E2E_BDT} = "false" ] ; then
 	echo "------- START BDT (CALABASH/CUCUMBER)"
@@ -35,7 +37,7 @@ if [ ! ${RANDOM} = "false" ] ; then
 	echo "------- START MONKEY"
 	rm ${MONKEY_RESULTS}
 	touch ${MONKEY_RESULTS}
-	$ANDROID_HOME/platform-tools/adb install -r -g ${APK_PATH}/WikipediaAndroid.apk
+	$ANDROID_HOME/platform-tools/adb install -r -g ${ANDROID_APK}
     $ANDROID_HOME/platform-tools/adb shell am start -n "org.wikipedia.dev/org.wikipedia.main.MainActivity"
 	$ANDROID_HOME/platform-tools/adb shell monkey -p org.wikipedia.dev -s ${RANDOM_SEED} -v ${RANDOM_EVENTS} >> ${MONKEY_RESULTS}
 	echo "------- END MONKEY"
@@ -49,6 +51,6 @@ if [ ! ${MUTATION} = "false" ] ; then
 	mkdir mutants
 	mvn clean
 	mvn package
-	java -jar target/MutAPK-0.0.1.jar ${APK_PATH}/WikipediaAndroid.apk org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
+	java -jar target/MutAPK-0.0.1.jar ${ANDROID_APK} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
 	echo "------- END MUTATION MUTAPK"
 fi
