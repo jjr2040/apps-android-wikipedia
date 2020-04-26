@@ -6,6 +6,7 @@ MONKEY_PATH="./tests/Monkey"
 MONKEY_NAME="monkey_results.txt"
 MONKEY_RESULTS=${MONKEY_PATH}/${MONKEY_NAME}
 VRT_DIFF_PATH="appium/snapshots/__diff_snapshots__"
+CUCUMBER_PATH="tests/BDT/calabash-wikipedia/"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
 VRT=$3
@@ -33,6 +34,7 @@ echo "--------------"
 mv -f ${APK_PATH}/*.apk ${ANDROID_APK}
 rm ${MONKEY_PATH}/*
 rm ${VRT_DIFF_PATH}/*
+rm ${CUCUMBER_PATH}/*
 
 if [ ! ${E2E_BDT} = "false" ] ; then
 	echo "------- START BDT (CALABASH/CUCUMBER)"
