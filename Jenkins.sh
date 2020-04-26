@@ -71,6 +71,6 @@ if [ ! ${MUTATION} = "false" ] ; then
 	mkdir mutants
 	mvn clean
 	mvn package
-	java -jar target/MutAPK-0.0.1.jar ${ANDROID_APK} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
+	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
 	echo "------- END MUTATION MUTAPK"
 fi
