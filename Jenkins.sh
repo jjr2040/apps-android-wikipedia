@@ -37,7 +37,8 @@ touch ${MONKEY_RESULTS}
 rm ${VRT_DIFF_PATH}/*
 rm ${CUCUMBER}
 
-if [ ! ${E2E_BDT} = "false" ] ; then
+test_e2e_bdt()
+{
 	echo "------- START BDT (CALABASH/CUCUMBER)"
 	gem install bundler
 	cd tests/BDT/calabash-wikipedia
@@ -46,6 +47,10 @@ if [ ! ${E2E_BDT} = "false" ] ; then
 	cd scripts && ./run_android_features -r -d ${ANDROID_AVD_DEVICE}
 	cd ../../../..
 	echo "------- END BDT (CALABASH/CUCUMBER)"
+}
+
+if [ ! ${E2E_BDT} = "false" ] ; then
+	test_e2e_bdt
 fi
 
 if [ ! ${VRT} = "false" ] ; then
@@ -68,9 +73,16 @@ if [ ! ${MUTATION} = "false" ] ; then
 	git clone https://github.com/TheSoftwareDesignLab/MutAPK.git
 	cd MutAPK
 	echo -e ${OPERATORS} > operators.properties
+	rm -rf mutants
 	mkdir mutants
 	mvn clean
 	mvn package
 	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
+	for FOLDER_MUTANT in ls
+	do
+	    echo "---Mutante: FOLDER_MUTANT" 
+	    export ANDROID_APK="FOLDER_MUTANT/app-alpha-debug.apk"
+	    test_e2e_bdt
+	done	
 	echo "------- END MUTATION MUTAPK"
 fi
