@@ -19,6 +19,7 @@ MUTANTS_NUMBER=$9
 OPERATORS=${10}
 
 echo "--------------"
+echo "APK: ${ANDROID_APK}"
 echo "Android device: ${ANDROID_AVD_DEVICE}"
 echo "E2E enabled: ${E2E_BDT}"
 echo "VRT enabled: ${VRT}"
