@@ -83,7 +83,7 @@ if [ ! ${MUTATION} = "false" ] ; then
 	for FOLDER_MUTANT in ${ls}
 	do
 	    echo "---Mutante: $FOLDER_MUTANT" 
-	    export ANDROID_APK="$FOLDER_MUTANT/${APK_NAME}"
+	    export ANDROID_APK="${PWD}/$FOLDER_MUTANT/${APK_NAME}"
 	    test_e2e_bdt
 	done	
 	echo "------- END MUTATION MUTAPK"
