@@ -80,10 +80,11 @@ if [ ! ${MUTATION} = "false" ] ; then
 	mvn package
 	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
 	cd mutants
-	for FOLDER_MUTANT in ${ls}
+	echo "---Finalizo creación de mutantes"
+	for FOLDER_MUTANT in ${ls -d */}
 	do
 	    echo "---Mutante: $FOLDER_MUTANT" 
-	    export ANDROID_APK="${PWD}/$FOLDER_MUTANT/${APK_NAME}"
+	    export ANDROID_APK=${PWD}/$FOLDER_MUTANT${APK_NAME}
 	    test_e2e_bdt
 	done	
 	echo "------- END MUTATION MUTAPK"
