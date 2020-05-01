@@ -76,8 +76,13 @@ if [ ! ${MUTATION} = "false" ] ; then
 	echo -e ${OPERATORS} > operators.properties
 	rm -rf mutants
 	mkdir mutants
-	mvn clean
-	mvn package
+	DIRECTORY=${PWD}/target
+
+	if [ -d "$DIRECTORY" ]; then
+	    mvn clean
+	    mvn package
+	fi
+	
 	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
 	cd mutants
 	echo "---Finalizo creación de mutantes"
@@ -85,6 +90,7 @@ if [ ! ${MUTATION} = "false" ] ; then
 	do
 	    echo "---Mutante: $FOLDER_MUTANT" 
 	    export ANDROID_APK=${PWD}/$FOLDER_MUTANT${APK_NAME}
+	    cd ../..
 	    test_e2e_bdt
 	done	
 	echo "------- END MUTATION MUTAPK"
