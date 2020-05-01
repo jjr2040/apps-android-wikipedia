@@ -92,6 +92,7 @@ if [ ! ${MUTATION} = "false" ] ; then
 	    export ANDROID_APK=${PWD}/$FOLDER_MUTANT${APK_NAME}
 	    cd ../..
 	    test_e2e_bdt
+	    cd MutAPK/mutants
 	done	
 	echo "------- END MUTATION MUTAPK"
 fi
