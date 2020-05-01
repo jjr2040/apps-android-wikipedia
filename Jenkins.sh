@@ -79,9 +79,10 @@ if [ ! ${MUTATION} = "false" ] ; then
 	mvn clean
 	mvn package
 	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
+	cd mutants
 	for FOLDER_MUTANT in ${ls}
 	do
-	    echo "---Mutante: FOLDER_MUTANT" 
+	    echo "---Mutante: $FOLDER_MUTANT" 
 	    export ANDROID_APK="$FOLDER_MUTANT/${APK_NAME}"
 	    test_e2e_bdt
 	done	
