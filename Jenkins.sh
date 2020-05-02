@@ -9,19 +9,21 @@ VRT_DIFF_PATH="appium/snapshots/__diff_snapshots__"
 CUCUMBER="tests/BDT/calabash-wikipedia/cucumber.json"
 ANDROID_AVD_DEVICE=$1
 E2E_BDT=$2
-VRT=$3
-export VRT_TRESHOLD=$4
-MONKEY=$5
-MONKEY_EVENTS=$6
-MONKEY_SEED=$7
-MUTATION=$8
-MUTANTS_NUMBER=$9
-OPERATORS=${10}
+APK_E2E=$3
+VRT=$4
+export VRT_TRESHOLD=$5
+MONKEY=$6
+MONKEY_EVENTS=$7
+MONKEY_SEED=$8
+MUTATION=$9
+MUTANTS_NUMBER=${10}
+OPERATORS=${11}
 
 echo "--------------"
 echo "APK: ${ANDROID_APK}"
 echo "Android device: ${ANDROID_AVD_DEVICE}"
 echo "E2E enabled: ${E2E_BDT}"
+echo "APK for E2E: ${APK_E2E}"
 echo "VRT enabled: ${VRT}"
 echo "VRT treshold: ${VRT_TRESHOLD}"
 echo "Monkey enabled: ${MONKEY}"
@@ -30,6 +32,7 @@ echo "Monkey seed: ${MONKEY_SEED}"
 echo "Mutation enabled: ${MUTATION}"
 echo "Number of mutants: ${MUTANTS_NUMBER}"
 echo "Mutation operators: ${OPERATORS}"
+
 echo "--------------"
 
 mv -f ${APK_PATH}/*.apk ${ANDROID_APK}
@@ -38,8 +41,11 @@ touch ${MONKEY_RESULTS}
 rm ${VRT_DIFF_PATH}/*
 rm ${CUCUMBER}
 
-test_e2e_bdt()
-{
+if [ ! ${E2E_BDT} = "false" ] ; then
+	if [ ! ${APK_E2E} = ${APK_NAME} ] ; then
+	    export ANDROID_APK=${PWD}/MutAPK/mutants/${APK_E2E}/${APK_NAME}
+	fi
+	
 	echo "------- START BDT (CALABASH/CUCUMBER)"
 	gem install bundler
 	cd tests/BDT/calabash-wikipedia
@@ -48,10 +54,6 @@ test_e2e_bdt()
 	cd scripts && ./run_android_features -r -d ${ANDROID_AVD_DEVICE}
 	cd ../../../..
 	echo "------- END BDT (CALABASH/CUCUMBER)"
-}
-
-if [ ! ${E2E_BDT} = "false" ] ; then
-	test_e2e_bdt
 fi
 
 if [ ! ${VRT} = "false" ] ; then
@@ -83,16 +85,6 @@ if [ ! ${MUTATION} = "false" ] ; then
 	    mvn package
 	fi
 	
-	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}
-	cd mutants
-	echo "---Finalizo creación de mutantes"
-	for FOLDER_MUTANT in $(ls -d */)
-	do
-	    echo "---Mutante: $FOLDER_MUTANT" 
-	    export ANDROID_APK=${PWD}/$FOLDER_MUTANT${APK_NAME}
-	    cd ../..
-	    test_e2e_bdt
-	    cd MutAPK/mutants
-	done	
+	java -jar target/MutAPK-0.0.1.jar ../${APK_PATH}/${APK_NAME} org.wikipedia ./mutants/ ./extra/ . true ${MUTANTS_NUMBER}	
 	echo "------- END MUTATION MUTAPK"
 fi
