@@ -1,0 +1,13 @@
+Feature: Search feature
+
+  Scenario: As a valid user I can log into my app
+    When I press "fragment_onboarding_skip_button"
+    And I press "Buscar en Wikipedia"
+    And I enter text "Gorillaz" into field with id "search_src_text"
+    And take picture
+    And I press "Proyecto británico musical y visual"
+    And take picture
+    And I wait for progress
+    And I press "article_menu_show_toc"
+    And take picture
+    Then I should see text containing "Historia"

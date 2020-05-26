@@ -1,0 +1,16 @@
+Feature: Change language feature
+
+  Scenario: As a valid user I can log into my app
+    When I press "fragment_onboarding_skip_button"
+    And I press "Buscar en Wikipedia"
+    And take picture
+    And I press "ES"
+    And take picture
+    And I press "Añadir idioma"
+    And take picture
+    And I press "Deutsch"
+    And take picture
+    And I press "Deutsch"
+    And I enter text "Gorillaz" into field with id "search_src_text"
+    And take picture
+    Then I should see "britische Musikgruppe"
